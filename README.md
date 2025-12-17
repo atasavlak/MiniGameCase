@@ -11,14 +11,10 @@ The project includes:
 - A gameplay-triggered quiz system
 - A result screen based on player performance
 
----
-
 ## Unity Version
 Unity 2022.3.xf1 (LTS)
 
 The project was developed and tested using Unity 2022.3 LTS to ensure stability.
-
----
 
 ## How to Run the Project
 1. Clone the GitHub repository:
@@ -29,9 +25,7 @@ The project was developed and tested using Unity 2022.3 LTS to ensure stability.
 5. Make sure Unity 2022.3.xf1 is selected
 6. Open the HubScene
 7. Press Play
-
----
-
+8. 
 ## Gameplay Flow
 1. The player starts in the Hub Scene
 2. From the hub, the player enters the Submarine Mini Game
@@ -49,8 +43,6 @@ The project was developed and tested using Unity 2022.3 LTS to ensure stability.
 7. From the result panel, the player can:
    - Restart the submarine mini game
    - Return to the hub scene
-
----
 
 ## Core Mechanics – Technical Explanation
 
@@ -76,16 +68,12 @@ The project was developed and tested using Unity 2022.3 LTS to ensure stability.
 - Player control is temporarily disabled during knockback
 - Control is restored after a short duration
 
----
-
 ## Chest Collection System
 - Treasure chests use trigger-based collision
 - When a chest is collected:
   - It is removed from the scene
   - The chest counter UI is updated
 - Collecting all chests triggers the quiz flow
-
----
 
 ## Quiz System
 - Quiz questions are defined using ScriptableObjects
@@ -98,8 +86,6 @@ The project was developed and tested using Unity 2022.3 LTS to ensure stability.
 - A live progress counter is displayed as:
   correct / answered
 
----
-
 ## Result Evaluation
 After the quiz is completed, a result panel is shown with the following logic:
 - 4–5 correct answers: Perfect!
@@ -108,28 +94,13 @@ After the quiz is completed, a result panel is shown with the following logic:
 
 The result panel also displays the final score and provides navigation options.
 
----
-
 ## Architecture Notes
 - SubmarineGameController acts as the central authority for gameplay flow
 - QuizManager handles quiz logic only
 - UI scripts are passive and contain no gameplay logic
 - Scope is intentionally kept small to avoid over-engineering
 
----
-
 ## Gameplay Video
 A short gameplay video demonstrating:
-- Submarine movement
-- Chest collection
-- Quiz flow
-- Result screen
 
 Video link:
-<add-video-link-here>
-
----
-
-## Repository
-GitHub repository:
-<add-repository-link-here>
