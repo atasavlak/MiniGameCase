@@ -29,6 +29,7 @@ public class PuzzlePiece : MonoBehaviour,
     private Vector3 startWorldPos;
 
     private bool isDragging;
+    private bool isPlaced = false;
 
     private Tween snapTween;
     private Tween scaleTween;
@@ -49,19 +50,19 @@ public class PuzzlePiece : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isDragging || !enabled) return;
+        if (isDragging || isPlaced) return;
         TweenScale(hoverScale);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (isDragging || !enabled) return;
+        if (isDragging || isPlaced) return;
         TweenScale(normalScale);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!enabled) return;
+        if (isPlaced) return;
 
         isDragging = true;
 
@@ -128,15 +129,22 @@ public class PuzzlePiece : MonoBehaviour,
             .Join(rect.DOPunchScale(Vector3.one * snapScalePunch, snapDuration, 6, 0.9f))
             .OnComplete(() =>
             {
+                snapTween?.Kill();
+                scaleTween?.Kill();
+                moveTween?.Kill();
+
                 rect.anchoredPosition = Vector2.zero;
                 rect.sizeDelta = targetSize;
                 rect.localScale = Vector3.one;
+
+                isPlaced = true;
                 enabled = false;
             });
     }
 
     private void ResetPieceTween()
     {
+        if (isPlaced) return;
         snapTween?.Kill();
         moveTween?.Kill();
 

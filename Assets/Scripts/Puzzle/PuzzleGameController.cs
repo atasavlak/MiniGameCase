@@ -1,42 +1,53 @@
 using UnityEngine;
 
-// Puzzle oyununun tamamlanma durumunu takip eder
 public class PuzzleGameController : MonoBehaviour
 {
     public static PuzzleGameController Instance;
 
-    [Header("Puzzle Settings")]
     public int totalPieces = 4;
-    public AudioSource sfxSource;
-    public AudioClip correctClip;
-
-
     private int correctPlacedCount = 0;
 
+    public GameObject completePanel;
+
+    public AudioSource sfxSource;
+    public AudioClip correctClip;
+    public float completeDelay = 0.8f;
+    
     private void Awake()
     {
         Instance = this;
     }
 
-    // Doğru parça yerleştiğinde çağrılır
     public void NotifyCorrectPlacement()
     {
         correctPlacedCount++;
 
         if (sfxSource != null && correctClip != null)
-        sfxSource.PlayOneShot(correctClip);
-
+            sfxSource.PlayOneShot(correctClip);
 
         if (correctPlacedCount >= totalPieces)
-        {
-            
-        }
+        Invoke(nameof(ShowCompletePanel), completeDelay);
     }
 
-        public void PlayCorrectSfx()
+    private void ShowCompletePanel()
+    {
+        if (completePanel != null)
+            completePanel.SetActive(true);
+    }
+
+    public void RestartPuzzle()
+    {
+        MiniGameManager.Instance.RestartCurrentGame();
+    }
+
+    public void ReturnToHub()
+    {
+        MiniGameManager.Instance.ReturnToHub();
+    }
+
+    public void PlayCorrectSfx()
     {
         if (sfxSource != null && correctClip != null)
             sfxSource.PlayOneShot(correctClip);
     }
-
 }
